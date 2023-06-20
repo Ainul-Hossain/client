@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./topbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare, faInstagramSquare, faPinterestSquare, faTwitterSquare } from "@fortawesome/free-brands-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { Context } from "../../context/Context";
 
 const Topbar = () => {
-  const user = false;
+  const {user, dispatch} = useContext(Context);
+  const PF = "http://localhost:5000/images/";
+
+  const handleLogout = ()=>{
+    dispatch({type: 'LOGOUT'})
+  }
 
   return (
     <div className="top">
@@ -23,15 +29,17 @@ const Topbar = () => {
           <li className="topListItem"><Link className="link" to='/'>ABOUT</Link></li>
           <li className="topListItem"><Link className="link" to='/'>CONTACT</Link></li>
           <li className="topListItem"><Link className="link" to='/write'>WRITE</Link></li>
-          <li className="topListItem">
+          <li className="topListItem" onClick={handleLogout}>
             {user && 'LOGOUT'}
           </li>
         </ul>
       </div>
 
+      {/* {PF + user.profilePic} */}
+
       <div className="topRight">
         {
-          user ? ( <img className="topImg" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" /> ) : ( 
+          user ? ( <Link to='/settings'><img className="topImg" src={user.profilePic?PF+user.profilePic:`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`} alt="" /></Link> ) : ( 
             <ul className="topList">
               <li className="topListItem"><Link className="link" to='/login'>LOGIN</Link></li>
               <li className="topListItem"><Link className="link" to='/register'>REGISTER</Link></li>
