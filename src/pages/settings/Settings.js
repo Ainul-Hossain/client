@@ -52,14 +52,31 @@ const Settings = () => {
         }
     }
 
-    // console.log(user);
+    const handleDelete = async ()=>{
+        
+        try{
+            await axios.delete('http://localhost:5000/api/users/'+user._id, {
+                data: {
+                    username: user.username,
+                    userId: user._id
+                }
+            })
+            dispatch({type: 'LOGOUT'})
+            alert('Your profile is deleted!');
+            // window.location.replace('/');
+        }catch(err){
+
+        }
+    }
+
+    console.log(user);
 
     return (
         <div className='settings'> 
             <div className="settingsWrapper">
                 <div className="settingsTitle">
                     <span className='settingsUpdateTitle'>Update Your Account</span>
-                    <span className='settingsDeleteTitle'>Delete Your Account</span>
+                    <span onClick={handleDelete} className='settingsDeleteTitle'>Delete Your Account</span>
                 </div>
 
                 {/* {file ? URL.createObjectURL(file) : PF + user.profilePic} */}

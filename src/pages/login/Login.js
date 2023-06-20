@@ -21,8 +21,11 @@ const Login = () => {
             })
 
             dispatch({type: 'LOGIN_SUCCESSFUL', payload: res.data});
+            alert('Login Successful!')
         }catch(err){
             dispatch({type: 'LOGIN_FAILURE'});
+            alert('Please give correct info!');
+            window.location.reload();
         }
     }
 

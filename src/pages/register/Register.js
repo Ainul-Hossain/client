@@ -21,6 +21,7 @@ const Register = () => {
             })
 
             res.data && window.location.replace('/login');
+            alert('Registration Successful!')
         }catch(err){
             // console.log(err);
             setErr(true);
@@ -36,7 +37,7 @@ const Register = () => {
                 <input required onChange={(e)=>setUsername(e.target.value)} className='registerInput' type="text" placeholder='Enter your username...' />
 
                 <label>Email</label>
-                <input required onChange={(e)=>setEamil(e.target.value)} className='registerInput' type="text" placeholder='Enter your email...' />
+                <input required onChange={(e)=>setEamil(e.target.value)} className='registerInput' type="email" placeholder='Enter your email...' />
                 
                 <label>Password</label>
                 <input required minLength={'4'} onChange={(e)=>setPassword(e.target.value)} className='registerInput' type="password" placeholder='Enter your password...' />
