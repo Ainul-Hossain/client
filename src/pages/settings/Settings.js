@@ -44,8 +44,12 @@ const Settings = () => {
         
         try{
             const res = await axios.put('http://localhost:5000/api/users/'+user._id, updatedUser);
+
+            await axios.put(`http://localhost:5000/api/posts/?user=${user.username}`, {  // corresponding post's username also updated
+                user: username
+            })
+
             setSuccess(true);
-            
             dispatch({type: 'UPDATE_SUCCESSFUL', payload: res.data});
         }catch(err){
             dispatch({type: 'UPDATE_FAILURE'});
@@ -61,6 +65,7 @@ const Settings = () => {
                     userId: user._id
                 }
             })
+
             dispatch({type: 'LOGOUT'})
             alert('Your profile is deleted!');
             // window.location.replace('/');
@@ -69,7 +74,7 @@ const Settings = () => {
         }
     }
 
-    console.log(user);
+    //console.log(user);
 
     return (
         <div className='settings'> 
